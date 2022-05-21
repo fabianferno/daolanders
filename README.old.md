@@ -1,2 +1,0 @@
-# daolanders
-Hack Money submission.

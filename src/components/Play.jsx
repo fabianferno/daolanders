@@ -1,0 +1,65 @@
+import React, { useEffect } from "react";
+import { useMoralis } from "react-moralis";
+import { motion, AnimatePresence } from "framer-motion";
+
+function Home() {
+  const { isAuthenticated, user } = useMoralis();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      // add your logic here
+      console.dir(user?.attributes.ethAddress);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 20 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 2.5 }}
+        className="container"
+      >
+        <div className="d-block d-md-flex justify-content-start align-items-center ">
+          <motion.div
+            className="col-12 col-md-3"
+            animate={{ y: [1, -15, 1] }}
+            transition={{ repeat: Infinity, duration: 1 }}
+          >
+            <img
+              src="https://media3.giphy.com/media/QsOq3W7wCoa0sC2QEN/giphy.gif?cid=ecf05e47vw37g2a9n4oymaagriqb2ongpm9kz137qwk47b3l&rid=giphy.gif&ct=s"
+              style={{
+                height: "350px",
+                width: "350px",
+                objectFit: "cover",
+              }}
+              alt=""
+            />
+          </motion.div>
+          <div className="mt-3 text-white text-start col-12 col-md-9">
+            <h1 className="fw-bold text-white " style={{ fontSize: "5em" }}>
+              DAOlanders
+            </h1>
+
+            <h2 className="mt-3 pb-2 text-white">
+              Welcome to the DAOlanders platform.
+            </h2>
+            <p className="text-secondary">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit
+              expedita debitis itaque voluptates cumque quos, eaque dolores
+              placeat iure, soluta quidem nulla sunt veniam nemo quisquam
+              molestiae, dolor deleniti voluptatum. Omnis autem, dicta
+              laudantium in quidem officiis, consequuntur aut mollitia facilis
+              nesciunt quisquam nulla nostrum neque commodi tenetur velit eius
+              maxime, quas voluptate a hic temporibus ex vero at. Magnam.
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+export default Home;
