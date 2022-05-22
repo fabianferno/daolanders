@@ -119,7 +119,7 @@ const App = ({ isServerInfo }) => {
             >
               <MenuItems />
 
-              <p className="text-dark">Waku node's status: {wakuStatus}</p>
+              <p className="text-dark me-2">Waku: {wakuStatus}</p>
 
               <Chains />
               <NativeBalance />
