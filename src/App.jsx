@@ -44,8 +44,10 @@ const styles = {
     fontWeight: "600",
   },
 };
+
+// eslint-disable-next-line
 const App = ({ isServerInfo }) => {
-  console.log("isServerInfo", isServerInfo);
+  // console.log("isServerInfo", isServerInfo);
 
   const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
     useMoralis();

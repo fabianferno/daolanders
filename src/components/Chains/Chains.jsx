@@ -81,21 +81,21 @@ const menuItems = [
 ];
 
 function Chains() {
-  const { switchNetwork, chainId, chain } = useChain();
+  const { switchNetwork, chainId } = useChain(); // chain
   const { isAuthenticated } = useMoralis();
   const [selected, setSelected] = useState({});
 
-  console.log("chain", chain);
+  // console.log("chain", chain);
 
   useEffect(() => {
     if (!chainId) return null;
     const newSelected = menuItems.find((item) => item.key === chainId);
     setSelected(newSelected);
-    console.log("current chainId: ", chainId);
+    // console.log("current chainId: ", chainId);
   }, [chainId]);
 
   const handleMenuClick = async (e) => {
-    console.log("switch to: ", e.key, chainId);
+    // console.log("switch to: ", e.key, chainId);
     switchNetwork(e.key);
     // Wait for two seconds
     await new Promise((resolve) => setTimeout(resolve, 4000));

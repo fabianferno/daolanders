@@ -6,12 +6,12 @@ import { useMoralis } from "react-moralis";
 
 function MenuItems() {
   // const { pathname } = useLocation();
-  const { isAuthenticated, user } = useMoralis();
+  const { isAuthenticated, user } = useMoralis(); // eslint-disable-line
 
   useEffect(() => {
     if (isAuthenticated) {
       // add your logic here
-      console.dir(user?.attributes.ethAddress);
+      // console.dir(user?.attributes.ethAddress);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);

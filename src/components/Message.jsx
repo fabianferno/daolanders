@@ -1,41 +1,23 @@
-import React, { useEffect } from "react";
-import { useMoralis } from "react-moralis";
-
-import protobuf from "protobufjs";
 import { Waku, WakuMessage } from "js-waku";
+import * as React from "react";
+import protobuf from "protobufjs";
+
+const ContentTopic = `/relay-reactjs-chat/1/chat/proto`;
 
 const SimpleChatMessage = new protobuf.Type("SimpleChatMessage")
   .add(new protobuf.Field("timestamp", 1, "uint64"))
   .add(new protobuf.Field("text", 2, "string"));
 
-const ContentTopic = `/relay-reactjs-chat/1/chat/proto`;
-
-function sendMessage(message, waku, timestamp) {
-  const time = timestamp.getTime();
-
-  // Encode to protobuf
-  const protoMsg = SimpleChatMessage.create({
-    timestamp: time,
-    text: message,
-  });
-  const payload = SimpleChatMessage.encode(protoMsg).finish();
-
-  // Wrap in a Waku Message
-  return WakuMessage.fromBytes(payload, ContentTopic).then((wakuMessage) =>
-    // Send over Waku Relay
-    waku.relay.send(wakuMessage),
-  );
-}
-
 function Message() {
-  const { isAuthenticated, user } = useMoralis();
-  const [waku, setWaku] = React.useState(undefined); // eslint-disable-line
-  const [wakuStatus, setWakuStatus] = React.useState("None"); // eslint-disable-line
+  const [waku, setWaku] = React.useState(undefined);
+  const [wakuStatus, setWakuStatus] = React.useState("None");
+
   // Using a counter just for the messages to be different
   const [sendCounter, setSendCounter] = React.useState(0);
+  const [messages, setMessages] = React.useState([]);
 
   React.useEffect(() => {
-    if (waku) return;
+    if (!!waku) return; // eslint-disable-line
     if (wakuStatus !== "None") return;
 
     setWakuStatus("Starting");
@@ -48,20 +30,6 @@ function Message() {
       });
     });
   }, [waku, wakuStatus]);
-
-  const sendMessageOnClick = () => {
-    // Check Waku is started and connected first.
-    if (wakuStatus !== "Ready") return;
-
-    sendMessage(`Here is message #${sendCounter}`, waku, new Date()).then(() =>
-      console.log("Message sent"),
-    );
-
-    // For demonstration purposes.
-    setSendCounter(sendCounter + 1);
-  };
-
-  const [messages, setMessages] = React.useState([]);
 
   const processIncomingMessage = React.useCallback((wakuMessage) => {
     if (!wakuMessage.payload) return;
@@ -89,37 +57,59 @@ function Message() {
     };
   }, [waku, wakuStatus, processIncomingMessage]);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      // add your logic here
-      console.dir(user?.attributes.ethAddress);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+  const sendMessageOnClick = () => {
+    // Check Waku is started and connected first.
+    if (wakuStatus !== "Ready") return;
+
+    sendMessage(`Here is message #${sendCounter}`, waku, new Date()).then(() =>
+      console.log("Message sent"),
+    );
+
+    // For demonstration purposes.
+    setSendCounter(sendCounter + 1);
+  };
 
   return (
-    <div className="text-white mt-5">
-      <h1 className="fw-bold mb-5 text-white">Send a Message</h1>
-      <p className="fw-bold">Waku Status: {wakuStatus}</p>
-      <ul>
-        {messages.map((msg) => {
-          return (
-            <li>
-              <p>
-                {msg.timestamp.toString()}: {msg.text}
-              </p>
-            </li>
-          );
-        })}
-      </ul>
-      <button
-        className="btn btn-dark"
-        onClick={sendMessageOnClick}
-        disabled={wakuStatus !== "Ready"}
-      >
-        Send Message with Waku
-      </button>
+    <div className="App">
+      <header className="App-header">
+        <p>{wakuStatus}</p>
+        <button
+          className="btn btn-dark"
+          onClick={sendMessageOnClick}
+          disabled={wakuStatus !== "Ready"}
+        >
+          Send Message
+        </button>
+        <ul>
+          {messages.map((msg) => {
+            return (
+              <li key={msg.timestamp.valueOf()}>
+                <p>
+                  {msg.timestamp.toString()}: {msg.text}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </header>
     </div>
+  );
+}
+
+function sendMessage(message, waku, timestamp) {
+  const time = timestamp.getTime();
+
+  // Encode to protobuf
+  const protoMsg = SimpleChatMessage.create({
+    timestamp: time,
+    text: message,
+  });
+  const payload = SimpleChatMessage.encode(protoMsg).finish();
+
+  // Wrap in a Waku Message
+  return WakuMessage.fromBytes(payload, ContentTopic).then((wakuMessage) =>
+    // Send over Waku Relay
+    waku.relay.send(wakuMessage),
   );
 }
 
