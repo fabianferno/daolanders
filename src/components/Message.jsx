@@ -1,6 +1,8 @@
 import { Waku, WakuMessage } from "js-waku";
 import * as React from "react";
 import protobuf from "protobufjs";
+import { useMoralis } from "react-moralis";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ContentTopic = `/relay-reactjs-chat/1/chat/proto`;
 
@@ -9,6 +11,7 @@ const SimpleChatMessage = new protobuf.Type("SimpleChatMessage")
   .add(new protobuf.Field("text", 2, "string"));
 
 function Message() {
+  const { isAuthenticated, user } = useMoralis(); // eslint-disable-line
   const [waku, setWaku] = React.useState(undefined);
   const [wakuStatus, setWakuStatus] = React.useState("None");
 
@@ -70,29 +73,67 @@ function Message() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>{wakuStatus}</p>
-        <button
-          className="btn btn-dark"
-          onClick={sendMessageOnClick}
-          disabled={wakuStatus !== "Ready"}
-        >
-          Send Message
-        </button>
-        <ul>
-          {messages.map((msg) => {
-            return (
-              <li key={msg.timestamp.valueOf()}>
-                <p>
-                  {msg.timestamp.toString()}: {msg.text}
-                </p>
-              </li>
-            );
-          })}
-        </ul>
-      </header>
-    </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 20 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 2.5 }}
+      >
+        <div className="text-white mt-5">
+          <h1 className="fw-bold mb-5 text-white">Send a Message</h1>
+
+          <form>
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">
+                DAO Owner
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                value={user?.attributes.ethAddress}
+                disabled
+              />
+              <div id="emailHelp" className="form-text">
+                Connected with wallet
+              </div>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                Token Proposal
+              </label>
+              <img src="tokens/snake_1.png" height="300px" alt="" />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                Describe why you're selling - the negotiation xD
+              </label>
+              <textarea className="form-control" cols={30} rows={5}></textarea>
+            </div>
+          </form>
+
+          <p className="fw-bold">Waku Status: {wakuStatus}</p>
+          <ul>
+            {messages.map((msg) => {
+              return (
+                <li>
+                  <p>
+                    {msg.timestamp.toString()}: {msg.text}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+          <button
+            className="btn btn-dark"
+            onClick={sendMessageOnClick}
+            disabled={wakuStatus !== "Ready"}
+          >
+            Send Message with Waku
+          </button>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 

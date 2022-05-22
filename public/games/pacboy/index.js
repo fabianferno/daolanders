@@ -7,9 +7,9 @@ const scoreEl = document.querySelector("#ScoreEl");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let boundaryColor = "blue";
+let boundaryColor = "#4444fc";
 let pacManColor = "yellow";
-let EnemyColor = "pink";
+let EnemyColor = "red";
 
 // Class for Boundary
 class Boundary {

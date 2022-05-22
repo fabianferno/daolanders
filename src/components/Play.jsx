@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { motion, AnimatePresence } from "framer-motion";
 
 function Home() {
   const { isAuthenticated, user } = useMoralis();
+  const [selectedGame, setSelectedGame] = useState("pacboy");
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -22,41 +23,65 @@ function Home() {
         transition={{ duration: 2.5 }}
         className="container"
       >
-        <div className="d-block d-md-flex justify-content-start align-items-center ">
-          <motion.div
-            className="col-12 col-md-3"
-            animate={{ y: [1, -15, 1] }}
-            transition={{ repeat: Infinity, duration: 1 }}
+        <h1 className="text-white text-center mt-3">Play to earn mini games</h1>
+        <div className="mt-3 d-flex justify-content-center">
+          <button
+            type="button"
+            className="mx-2 btn text-white fw-bold"
+            style={{ background: "#4444fc" }}
+            onClick={() => setSelectedGame("pacboy")}
           >
-            <img
-              src="https://media3.giphy.com/media/QsOq3W7wCoa0sC2QEN/giphy.gif?cid=ecf05e47vw37g2a9n4oymaagriqb2ongpm9kz137qwk47b3l&rid=giphy.gif&ct=s"
-              style={{
-                height: "350px",
-                width: "350px",
-                objectFit: "cover",
-              }}
-              alt=""
-            />
-          </motion.div>
-          <div className="mt-3 text-white text-start col-12 col-md-9">
-            <h1 className="fw-bold text-white " style={{ fontSize: "5em" }}>
-              DAOlanders
-            </h1>
-
-            <h2 className="mt-3 pb-2 text-white">
-              Welcome to the DAOlanders platform.
-            </h2>
-            <p className="text-secondary">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit
-              expedita debitis itaque voluptates cumque quos, eaque dolores
-              placeat iure, soluta quidem nulla sunt veniam nemo quisquam
-              molestiae, dolor deleniti voluptatum. Omnis autem, dicta
-              laudantium in quidem officiis, consequuntur aut mollitia facilis
-              nesciunt quisquam nulla nostrum neque commodi tenetur velit eius
-              maxime, quas voluptate a hic temporibus ex vero at. Magnam.
-            </p>
-          </div>
+            Pac Boy
+          </button>
+          <button
+            type="button"
+            className="mx-2 btn text-white fw-bold"
+            style={{ background: "#4444fc" }}
+            onClick={() => setSelectedGame("fighter-bloks")}
+          >
+            Fighter Bloks
+          </button>
+          <button
+            type="button"
+            className="mx-2 btn text-white fw-bold"
+            style={{ background: "#4444fc" }}
+            onClick={() => setSelectedGame("flappies")}
+          >
+            Flappies
+          </button>
         </div>
+        {selectedGame === "pacboy" && (
+          <div className="mt-4 d-flex justify-content-center align-items-center">
+            <iframe
+              style={{ height: "580px", width: "500px" }}
+              src="games/pacboy"
+              frameBorder="0"
+              scrolling="no"
+            ></iframe>
+          </div>
+        )}
+
+        {selectedGame === "fighter-bloks" && (
+          <div className="mt-4 d-flex justify-content-center align-items-center">
+            <iframe
+              style={{ height: "600px", width: "1100px" }}
+              src="games/fighter-bloks"
+              frameBorder="0"
+              scrolling="no"
+            ></iframe>
+          </div>
+        )}
+
+        {selectedGame === "flappies" && (
+          <div className="mt-4 d-flex justify-content-center align-items-center">
+            <iframe
+              style={{ height: "580px", width: "500px" }}
+              src="games/flappies"
+              frameBorder="0"
+              scrolling="no"
+            ></iframe>
+          </div>
+        )}
       </motion.div>
     </AnimatePresence>
   );
