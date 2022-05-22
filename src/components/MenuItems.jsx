@@ -46,6 +46,19 @@ function MenuItems() {
                 Marketplace
               </NavLink>
             </li>
+            <li className="bg-black btn badge btn-sm nav-item mx-2 my-2 my-md-0">
+              <NavLink className="nav-link active text-white" to="/wallet">
+                Wallet
+              </NavLink>
+            </li>
+            <li className="bg-black btn badge btn-sm nav-item mx-2 my-2 my-md-0">
+              <NavLink
+                className="nav-link active text-white"
+                to="/erc20transfers"
+              >
+                Transfers
+              </NavLink>
+            </li>
           </React.Fragment>
         )}
       </ul>

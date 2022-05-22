@@ -47,13 +47,13 @@ function Home() {
               A Game-Fi DAO where you can play games solo and against other
               people and earn exciting rewards.
             </h2>
-            <p className="text-secondary">
+            <h5 className="text-secondary fw-light w-75">
               This project is a DAO focused on investing together to play games
               and earn money. Once you create a DAO, you will be provided a land
               and a God to worship, play with and earn rewards. More the people
               in the DAO, higher the rewards. People can interact with each
               other in the DAO giving a feel of metaverse.
-            </p>
+            </h5>
           </div>
         </div>
 

@@ -27,18 +27,21 @@ const styles = {
 
 function Wallet() {
   return (
-    <Card
-      style={styles.card}
-      title={
-        <div style={styles.header}>
-          <Blockie scale={5} avatar currentWallet style />
-          <Address size="6" copyable />
-          <NativeBalance />
-        </div>
-      }
-    >
-      <Transfer />
-    </Card>
+    <div className="mt-5">
+      <h1 className="text-white text-center">Wallet</h1>
+      <Card
+        style={styles.card}
+        title={
+          <div style={styles.header}>
+            <Blockie scale={5} avatar currentWallet style />
+            <Address size="6" copyable />
+            <NativeBalance />
+          </div>
+        }
+      >
+        <Transfer />
+      </Card>
+    </div>
   );
 }
 
