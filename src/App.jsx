@@ -8,6 +8,7 @@ import Home from "components/Home";
 import Play from "components/Play";
 import Register from "components/Register";
 import Message from "components/Message";
+import Marketplace from "components/Marketplace";
 
 import ERC20Balance from "components/ERC20Balance";
 import ERC20Transfers from "components/ERC20Transfers";
@@ -79,22 +80,6 @@ const App = ({ isServerInfo }) => {
   return (
     <Layout style={{ minHeight: "100vh" }} className="bg-black text-white">
       <Router>
-        {/* <Header style={styles.header}>
-          <Logo />
-          <MenuItems />
-          <div style={styles.headerRight}>
-            <Chains />
-          <TokenPrice
-              address="0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
-              chain="eth"
-              image="https://cloudflare-ipfs.com/ipfs/QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg/"
-              size="40px"
-            />  
-            <NativeBalance />
-            <Account />
-          </div>
-        </Header> */}
-
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
             <Link
@@ -121,7 +106,7 @@ const App = ({ isServerInfo }) => {
             >
               <MenuItems />
 
-              <p className="text-dark me-2">Waku: {wakuStatus}</p>
+              <p className="text-dark me-2 mt-2">Waku: {wakuStatus}</p>
 
               <Chains />
               <NativeBalance />
@@ -144,7 +129,9 @@ const App = ({ isServerInfo }) => {
             <Route path="/message">
               <Message />
             </Route>
-
+            <Route path="/marketplace">
+              <Marketplace />
+            </Route>
             <Route path="/wallet">
               <Wallet />
             </Route>
@@ -176,7 +163,7 @@ const App = ({ isServerInfo }) => {
         style={{ textAlign: "right" }}
       >
         <p>
-          Made with ❤️ by{" "}
+          Made with ❤️ <br /> by{" "}
           <a
             href="https://twitter.com/FabianFerno"
             className="fw-bold text-white text-decoration-none"

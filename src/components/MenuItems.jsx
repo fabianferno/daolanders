@@ -41,6 +41,11 @@ function MenuItems() {
                 Chat
               </NavLink>
             </li>
+            <li className="bg-black btn badge btn-sm nav-item mx-2 my-2 my-md-0">
+              <NavLink className="nav-link active text-white" to="/marketplace">
+                Marketplace
+              </NavLink>
+            </li>
           </React.Fragment>
         )}
       </ul>

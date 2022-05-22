@@ -110,7 +110,7 @@ function Account() {
         }}
         onClick={() => setIsModalVisible(true)}
       >
-        <p className="text-white py-1 me-2">{getEllipsisTxt(account, 6)}</p>
+        <p className="text-white mt-2 me-2">{getEllipsisTxt(account, 6)}</p>
         <Blockie currentWallet scale={3} />
       </div>
       <Modal

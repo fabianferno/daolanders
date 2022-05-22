@@ -14,7 +14,7 @@ function Register() {
 
   return (
     <div className="text-white mt-5">
-      <h1 className="fw-bold mb-5 text-white">Mint a land</h1>
+      <h1 className="fw-bold mb-5 text-white">Mint your DAO</h1>
       <form>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
@@ -32,15 +32,9 @@ function Register() {
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
-            NFT Name
+            DAO Name
           </label>
           <input type="text" className="form-control" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Description
-          </label>
-          <textarea className="form-control" cols={30} rows={5}></textarea>
         </div>
 
         <div className="mb-3 form-check">

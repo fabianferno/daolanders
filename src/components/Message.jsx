@@ -81,56 +81,59 @@ function Message() {
         transition={{ duration: 2.5 }}
       >
         <div className="text-white mt-5">
-          <h1 className="fw-bold mb-5 text-white">Send a Message</h1>
+          <h1 className="fw-bold mb-5 text-white">
+            Chat with your DAO members
+          </h1>
 
-          <form>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                DAO Owner
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                value={user?.attributes.ethAddress}
-                disabled
-              />
-              <div id="emailHelp" className="form-text">
-                Connected with wallet
-              </div>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Token Proposal
-              </label>
+          <div className="d-md-flex d-block justify-content-around align-items-center">
+            <div className="col-md-4">
               <img src="tokens/snake_1.png" height="300px" alt="" />
             </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Describe why you're selling - the negotiation xD
-              </label>
-              <textarea className="form-control" cols={30} rows={5}></textarea>
-            </div>
-          </form>
+            <div className="col-md-5 text-end">
+              <div className="talk-bubble tri-right left-top text-dark">
+                <div className="talktext">
+                  <p>Shall we sell the God of Cricket?</p>
+                </div>
+              </div>
+              <div className="talk-bubble tri-right right-top text-dark">
+                <div className="talktext">
+                  <p>No, we'll wait until it reaches level 5</p>
+                </div>
+              </div>
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
+                    Describe why you're selling - the negotiation xD
+                  </label>
+                  <textarea
+                    className="form-control"
+                    cols={30}
+                    rows={3}
+                  ></textarea>
+                </div>
+              </form>
 
-          <p className="fw-bold">Waku Status: {wakuStatus}</p>
-          <ul>
-            {messages.map((msg) => {
-              return (
-                <li>
-                  <p>
-                    {msg.timestamp.toString()}: {msg.text}
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
-          <button
-            className="btn btn-dark"
-            onClick={sendMessageOnClick}
-            disabled={wakuStatus !== "Ready"}
-          >
-            Send Message with Waku
-          </button>
+              <p className="fw-bold">Waku Status: {wakuStatus}</p>
+              <ul>
+                {messages.map((msg) => {
+                  return (
+                    <li>
+                      <p>
+                        {msg.timestamp.toString()}: {msg.text}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+              <button
+                className="btn btn-dark  "
+                onClick={sendMessageOnClick}
+                disabled={wakuStatus !== "Ready"}
+              >
+                Send Message with Waku
+              </button>
+            </div>
+          </div>
         </div>
       </motion.div>
     </AnimatePresence>

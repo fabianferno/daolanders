@@ -43,15 +43,58 @@ function Home() {
               DAOlanders
             </h1>
 
-            <h2 className="mt-3 pb-2 text-white">
-              a DAO based NFT marketplace
+            <h2 className="mt-3 pb-2 text-white w-75">
+              A Game-Fi DAO where you can play games solo and against other
+              people and earn exciting rewards.
             </h2>
             <p className="text-secondary">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit
-              expedita debitis itaque voluptates cumque quos, eaque dolores
-              placeat iure, soluta quidem nulla sunt veniam nemo quisquam
-              molestiae, dolor deleniti voluptatum. Omnis autem, dicta
+              A Game-Fi DAO where you can play games solo and against other
+              people and earn exciting rewards.
             </p>
+          </div>
+        </div>
+
+        <h5 className="py-5 text-end my-5  text-white">
+          Powered by the <span className="fw-bold">Polygon Network</span>
+        </h5>
+
+        <div className="d-md-flex align-items-center justify-content-center my-5 container">
+          <div className="col-md-5 mx-md-5">
+            <img
+              src="tokens/cricket_1.png"
+              className="img-fluid"
+              alt=""
+              srcSet=""
+            />
+          </div>
+          <div className="col-md-7 mt-5 mt-md-0">
+            <h1 className="fw-bold w-75">Verify Once, Bank Anywhere</h1>
+            <h4 className="text-white fw-light w-75">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit unde
+              neque sapiente quae recusandae, incidunt totam sit quaerat
+              mollitia voluptate accusamus suscipit quidem hic quibusdam dolor
+              officia vero dignissimos. Accusantium!
+            </h4>
+          </div>
+        </div>
+
+        <div className="d-md-flex align-items-center justify-content-center my-5 container">
+          <div className="col-md-7 mt-5 mt-md-0">
+            <h1 className="fw-bold w-75">Decentralized KYC</h1>
+            <h4 className="text-white fw-light w-75">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Reprehenderit, unde in quam neque labore at debitis fugiat est ut
+              soluta consequatur cupiditate non, hic quos rerum quo dolorum sint
+              delectus?
+            </h4>
+          </div>
+          <div className="col-md-5 mx-md-5">
+            <img
+              src="tokens/gamblling_1.png"
+              className="img-fluid"
+              alt=""
+              srcSet=""
+            />
           </div>
         </div>
       </motion.div>
